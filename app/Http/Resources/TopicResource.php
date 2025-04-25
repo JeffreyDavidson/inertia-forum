@@ -14,6 +14,6 @@ class TopicResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return $this->only('id', 'name', 'slug');
+        return $this->only('id', 'title', 'slug');
     }
 }
