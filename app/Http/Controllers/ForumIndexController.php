@@ -12,6 +12,8 @@ class ForumIndexController extends Controller
         return inertia()->render('Forum/Index', [
             'discussions' => DiscussionResource::collection(
                 Discussion::with(['topic'])
+                    ->orderByPinned()
+                    ->latest()
                     ->paginate(10)
             ),
         ]);
