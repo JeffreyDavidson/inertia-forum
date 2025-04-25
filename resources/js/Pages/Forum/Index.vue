@@ -1,4 +1,6 @@
 <script setup>
+import InputLabel from '@/Components/InputLabel.vue';
+import Select from '@/Components/Select.vue';
 import ForumLayout from '@/Layouts/ForumLayout.vue';
 import { Head } from '@inertiajs/vue3';
 </script>
@@ -11,7 +13,13 @@ import { Head } from '@inertiajs/vue3';
             class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
         >
             <div class="p-6 text-gray-900">
-
+                <div>
+                    <InputLabel for="topic" value="Topic" class="sr-only"/>
+                    <Select id="topic">
+                        <option value="">All Topics</option>
+                        <option :value="topic.slug" v-for="topic in $page.props.topics" :key="topic.id">{{ topic.name }}</option>
+                    </Select>
+                </div>
             </div>
         </div>
         <template #side>
