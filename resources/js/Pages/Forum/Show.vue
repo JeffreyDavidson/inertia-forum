@@ -2,6 +2,7 @@
 import ForumLayout from '@/Layouts/ForumLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import Post from '@/Components/Forum/Post.vue';
+import Pagination from '@/Components/Pagination.vue';
 
 defineProps({
     discussion: Object,
@@ -29,7 +30,10 @@ defineProps({
                     </div>
                 </div>
             </div>
-            <Post v-for="post in posts.data" :key="post.id" :post="post"></Post>
+            <template v-if="posts.data.length">
+                <Post v-for="post in posts.data" :key="post.id" :post="post"/>
+                <Pagination class="!mt-6" :pagination="posts.meta"/>
+            </template>
         </div>
 
         <template #side>
