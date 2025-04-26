@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Discussion extends Model
@@ -30,6 +31,12 @@ class Discussion extends Model
     {
         return $this->hasOne(Post::class)
             ->latestOfMany();
+    }
+
+    public function participants(): HasManyThrough
+    {
+        return $this->hasManyThrough(User::class, Post::class, 'discussion_id', 'id', 'id', 'user_id')
+            ->distinct();
     }
 
     public function user(): BelongsTo
