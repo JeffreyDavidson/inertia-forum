@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 .markdown p {
-    @apply mb-2
+    @apply mb-2;
 }
 
 code {
-
+    @apply whitespace-pre-wrap leading-loose;
 }
 
 .shiki {
-    @apply p-6 rounded-lg my-4 text-sm
+    @apply p-6 rounded-lg my-4 text-sm;
 }
