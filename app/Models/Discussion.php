@@ -3,14 +3,38 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Str;
 
 class Discussion extends Model
 {
+    protected static function booted()
+    {
+        static::created(function ($discussion) {
+            $discussion->update(['slug' => $discussion->title]);
+        });
+    }
+
+    protected $fillable = [
+        'title',
+        'slug',
+    ];
+
+    /**
+     * Interact with the user's first name.
+     */
+    protected function slug(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => $this->id.'-'.Str::slug($value)
+        );
+    }
+
     public function topic(): BelongsTo
     {
         return $this->belongsTo(Topic::class);
