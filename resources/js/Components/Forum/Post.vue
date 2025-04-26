@@ -5,7 +5,7 @@
         </div>
         <div class="w-full">
             <div class="">{{ post.user.username }}</div>
-            <div class="text-sm text-gray-500">Posted {{ post.created_at.human }}</div>
+            <div class="text-sm text-gray-500">Posted <time :datetime="post.created_at.datetime" :title="post.created_at.datetime">{{ post.created_at.human }}</time></div>
             <div class="mt-3">{{ post.body }}</div>
         </div>
     </div>

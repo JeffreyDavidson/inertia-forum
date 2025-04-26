@@ -26,6 +26,12 @@ class Discussion extends Model
             ->whereNull('parent_id');
     }
 
+    public function latestPost(): HasOne
+    {
+        return $this->hasOne(Post::class)
+            ->latestOfMany();
+    }
+
     public function user(): BelongsTo
     {
         return $this->belognsTo(User::class);
