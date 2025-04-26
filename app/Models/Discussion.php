@@ -54,4 +54,16 @@ class Discussion extends Model
     {
         $query->orderBy('pinned_at', 'desc');
     }
+
+    #[Scope]
+    public function orderByLastPost($query)
+    {
+        $query->orderBy(
+            Post::select('created_at')
+                ->whereColumn('posts.discussion_id', 'discussions.id')
+                ->latest()
+                ->take(1),
+            'desc'
+        );
+    }
 }

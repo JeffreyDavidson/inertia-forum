@@ -13,7 +13,7 @@ class ForumIndexController extends Controller
             'discussions' => DiscussionResource::collection(
                 Discussion::with(['topic', 'post', 'latestPost.user', 'participants'])
                     ->orderByPinned()
-                    ->latest()
+                    ->orderByLastPost()
                     ->paginate(10)
             ),
         ]);
