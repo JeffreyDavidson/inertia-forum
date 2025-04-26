@@ -5,6 +5,7 @@ import Discussion from '@/Components/Forum/Discussion.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import { Head } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
+import Navigation from '@/Components/Forum/Navigation.vue';
 
 defineProps({
     discussions: Object
@@ -39,11 +40,7 @@ defineProps({
         </div>
 
         <template #side>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    Side
-                </div>
-            </div>
+            <Navigation/>
         </template>
     </ForumLayout>
 </template>
