@@ -1,18 +1,22 @@
 <script setup>
 import ForumLayout from '@/Layouts/ForumLayout.vue';
 import Select from '@/Components/Select.vue';
-import Discussion from '@/Components/Forum/Discussion.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import { Head, router } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 import Navigation from '@/Components/Forum/Navigation.vue';
-import _omitBy from 'lodash.omitby';
-import _isEmpty from 'lodash.isempty';
+import Discussion from '@/Components/Forum/Discussion.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import { Head, router } from '@inertiajs/vue3';
+import _omitBy from 'lodash.omitby'
+import _isEmpty from 'lodash.isempty'
+import useCreateDiscussion from '@/Composables/useCreateDiscussion';
 
 defineProps({
     discussions: Object,
     query: Object
 })
+
+const { showCreateDiscussionForm } = useCreateDiscussion()
 
 const filterTopic = (e) => {
     router.visit('/', {
@@ -20,7 +24,7 @@ const filterTopic = (e) => {
             'filter[topic]': e.target.value
         }, _isEmpty),
         preserveScroll: true
-    });
+    })
 }
 </script>
 
@@ -51,13 +55,16 @@ const filterTopic = (e) => {
             <div class="space-y-3">
                 <template v-if="discussions.data.length">
                     <Discussion v-for="discussion in discussions.data" :key="discussion.id" :discussion="discussion" />
-                    <Pagination :pagination="discussions.meta"/>
+                    <Pagination class="!mt-6" :pagination="discussions.meta" />
                 </template>
             </div>
         </div>
 
         <template #side>
-            <Navigation :query="query"/>
+            <PrimaryButton v-on:click="showCreateDiscussionForm" class="w-full flex justify-center h-10" v-if="$page.props.auth.user">
+                Start a discussion
+            </PrimaryButton>
+            <Navigation :query="query" />
         </template>
     </ForumLayout>
 </template>
