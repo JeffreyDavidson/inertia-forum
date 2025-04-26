@@ -24,9 +24,10 @@
             </div>
             <div class="flex-shrink-0">
                 <div class="flex items-center justify-start -space-x-1">
-                    <img :src="participant.avatar_url" alt="" v-for="participant in discussion.participants"
+                    <img :src="participant.avatar_url" alt="" v-for="participant in participants"
                         :key="participant.id" class="h-6 w-6 rounded-full ring-2 ring-white first-of-type:w-7 first-of-type:h-7"
                         :title="participant.username"/>
+                    <span class="!ml-1 text-sm text-gray-600" v-if="discussion.participants.length > 3">+  {{ discussion.participants.length - 3 }} more</span>
                 </div>
             </div>
         </div>
@@ -35,8 +36,12 @@
 
 <script setup>
 import { Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
-defineProps({
+const props = defineProps({
     discussion: Object
 })
+
+const participants = computed(() => props.discussion.participants.slice(0, 3));
+
 </script>
