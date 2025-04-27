@@ -18,6 +18,8 @@ class ForumIndexController extends Controller
 {
     public function __invoke(Request $request)
     {
+        Discussion::search($request->search)->get();
+
         return inertia()->render('Forum/Index', [
             'query' => (object) $request->query(),
             'discussions' => DiscussionResource::collection(
@@ -27,6 +29,11 @@ class ForumIndexController extends Controller
                     ->withCount('replies')
                     ->orderByPinned()
                     ->orderByLastPost()
+                    ->tap(function ($builder) use ($request) {
+                        if (filled($request->search)) {
+                            return $builder->whereIn('id', Discussion::search($request->search)->get()->pluck('id'));
+                        }
+                    })
                     ->paginate(10)
                     ->appends($request->query())
             ),
