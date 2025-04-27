@@ -16,4 +16,9 @@ class DiscussionPolicy
     {
         return true;
     }
+
+    public function delete(User $user, Discussion $discussion)
+    {
+        return $discussion->user()->is($user);
+    }
 }

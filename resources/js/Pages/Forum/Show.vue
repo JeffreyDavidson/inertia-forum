@@ -1,6 +1,6 @@
 <script setup>
 import ForumLayout from '@/Layouts/ForumLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 import Post from '@/Components/Forum/Post.vue';
 import Pagination from '@/Components/Pagination.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -36,6 +36,12 @@ onMounted(() => {
 onUpdated(() => {
     scrollToPost(props.postId);
 });
+
+const deleteDiscussion = () => {
+    if (window.confirm('Are you sure?')) {
+        router.delete(route('discussions.destroy', props.discussion));
+    }
+}
 </script>
 
 <template>
@@ -55,6 +61,11 @@ onUpdated(() => {
                             </template>
                             {{ discussion.title }}
                         </h1>
+                        <ul>
+                            <li v-if="discussion.user_can.delete">
+                                <button class="text-indigo-700 text-sm" v-if="deleteDiscussion" v-on:click="deleteDiscussion">Delete</button>
+                            </li>
+                        </ul>
                     </div>
                     <div class="text-sm">
                         {{ pluralize('reply', discussion.replies_count, true) }}
