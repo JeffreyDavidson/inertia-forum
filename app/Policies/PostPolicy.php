@@ -11,4 +11,9 @@ class PostPolicy
     {
         return $post->user()->is($user);
     }
+
+    public function delete(User $user, Post $post)
+    {
+        return $post->user()->is($user);
+    }
 }
