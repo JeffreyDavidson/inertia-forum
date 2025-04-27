@@ -35,7 +35,7 @@
                     <button v-on:click="editing = true" class="text-indigo-500 text-sm">Edit</button>
                 </li>
                 <li v-if="post.user_can.delete">
-                    <button class="text-indigo-500 text-sm">Delete</button>
+                    <button v-on:click="deletePost" class="text-indigo-500 text-sm">Delete</button>
                 </li>
             </ul>
         </div>
