@@ -36,6 +36,9 @@
                 <InputLabel for="body" value="Body" class="sr-only"/>
                 <Mentionable :keys="['@']" offset="6" v-on:search="mentionSearch" :items="mentionSearchResults" v-if="!markdownPreviewEnabled">
                     <Textarea v-if="!markdownPreviewEnabled" id="body" class="w-full h-48 align-top" v-model="form.body"/>
+                    <template #no-result>
+                        <div class="mention-item">No username found</div>
+                    </template>
                 </Mentionable>
                 <InputError class="mt-2" :message="form.errors.body"/>
             </div>
