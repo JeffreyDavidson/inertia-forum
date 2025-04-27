@@ -21,4 +21,9 @@ class DiscussionPolicy
     {
         return $discussion->user()->is($user);
     }
+
+    public function solve(User $user, Discussion $discussion)
+    {
+        return $discussion->user()->is($user);
+    }
 }
