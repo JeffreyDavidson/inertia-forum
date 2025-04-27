@@ -5,6 +5,7 @@
         <md-italic class="cursor-pointer py-1.5 px-1"><Svg name="icon-italic" class="h-5 w-5"></Svg></md-italic>
         <md-code class="cursor-pointer py-1.5 px-1"><Svg name="icon-code" class="h-5 w-5"></Svg></md-code>
         <md-link class="cursor-pointer py-1.5 px-1"><Svg name="icon-link" class="h-5 w-5"></Svg></md-link>
+        <md-mention class="cursor-pointer py-1.5 px-1"><Svg name="icon-at" class="h-5 w-5"></Svg></md-mention>
     </markdown-toolbar>
 </template>
 
