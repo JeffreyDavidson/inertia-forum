@@ -7,7 +7,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import pluralize from 'pluralize';
 import Navigation from '@/Components/Forum/Navigation.vue';
 import useCreatePost from '@/Composables/useCreatePost';
-import { onMounted, onUpdated, nextTick } from 'vue';
+import { onMounted, onUpdated, nextTick, watch } from 'vue';
 import VueScrollTo from 'vue-scrollto';
 
 const { showCreatePostForm } = useCreatePost();
@@ -33,8 +33,8 @@ onMounted(() => {
     scrollToPost(props.postId);
 });
 
-onUpdated(() => {
-    scrollToPost(props.postId);
+watch(() => props.post_id, (postId) => {
+    scrollToPost(postId);
 });
 
 const deleteDiscussion = () => {
