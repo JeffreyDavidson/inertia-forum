@@ -19,8 +19,6 @@ class ForumIndexController extends Controller
 {
     public function __invoke(Request $request)
     {
-        Discussion::search($request->search)->get();
-
         return inertia()->render('Forum/Index', [
             'query' => (object) $request->query(),
             'discussions' => DiscussionResource::collection(
