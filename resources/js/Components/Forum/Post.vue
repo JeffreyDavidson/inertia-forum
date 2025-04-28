@@ -38,7 +38,7 @@
                 <li v-if="post.user_can.delete">
                     <button v-on:click="deletePost" class="text-indigo-500 text-sm">Delete</button>
                 </li>
-                <li v-if="post.discussion.user_can.solve">
+                <li v-if="post.discussion.user_can.solve && props.index !== 0">
                     <button
                         class="text-indigo-500 text-sm"
                         v-on:click="router.patch(route('discussions.solution.patch', post.discussion), { post_id: isSolution ? null : post.id }, { preserveScroll: true })"
@@ -65,7 +65,8 @@ import { router } from '@inertiajs/vue3'
 
 const props = defineProps({
     post: Object,
-    isSolution: Boolean
+    isSolution: Boolean,
+    index: Number
 })
 
 const { showCreatePostForm } = useCreatePost()
