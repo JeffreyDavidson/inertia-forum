@@ -3,15 +3,18 @@ import { useForm } from '@inertiajs/vue3'
 
 const visible = ref(false)
 const discussion = ref(null)
+const user = ref(null)
 
 const form = useForm({
-    body: ''
+    body: '',
 })
 
 export default () => {
-    const showCreatePostForm = (discussionContext) => {
-        discussion.value = discussionContext;
-        visible.value = true;
+    const showCreatePostForm = (discussionContext, userContext = null) => {
+        discussion.value = discussionContext
+        user.value = userContext
+
+        visible.value = true
     }
 
     const hideCreatePostForm = () => {
@@ -23,6 +26,7 @@ export default () => {
         visible,
         showCreatePostForm,
         hideCreatePostForm,
-        discussion
+        discussion,
+        user
     }
 }

@@ -44,7 +44,11 @@ const { visible, hideCreatePostForm, form, discussion, user } = useCreatePost()
 const { mentionSearch, mentionSearchResults } = useMentionSearch();
 
 watch(user, (user) => {
+    if (!user) {
+        return
+    }
 
+    form.body = `@${user.username}` + form.body
 })
 
 const createPost = () => {
