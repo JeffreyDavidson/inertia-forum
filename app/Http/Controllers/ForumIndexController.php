@@ -21,6 +21,7 @@ class ForumIndexController extends Controller
     {
         return inertia()->render('Forum/Index', [
             'query' => (object) $request->query(),
+
             'discussions' => DiscussionResource::collection(
                 QueryBuilder::for(Discussion::class)
                     ->allowedFilters($this->allowedFilters())
@@ -39,7 +40,7 @@ class ForumIndexController extends Controller
         ]);
     }
 
-    protected function allowedFilters(): array
+    protected function allowedFilters()
     {
         return [
             AllowedFilter::custom('noreplies', new NoRepliesQueryFilter),

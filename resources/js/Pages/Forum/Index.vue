@@ -53,7 +53,7 @@ watch(searchQuery, (query) => {
                 <div class="p-6 text-gray-900 flex items-center space-x-3">
                     <div class="flex-grow">
                         <InputLabel for="search" value="search" class="sr-only"/>
-                        <TextInput type="search" id="search" class="w-full" placehodler="Search discussions" v-model="searchQuery"/>
+                        <TextInput type="search" id="search" class="w-full" v-model="searchQuery" placeholder="Search discussions"/>
                     </div>
                     <div>
                         <InputLabel for="topic" value="Topic" class="sr-only" />
