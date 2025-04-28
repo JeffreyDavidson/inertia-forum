@@ -41,7 +41,7 @@
                 <li v-if="post.discussion.user_can.solve && props.index !== 0">
                     <button
                         class="text-indigo-500 text-sm"
-                        v-on:click="router.patch(route('discussions.solution.patch', post.discussion), { post_id: isSolution ? null : post.id }, { preserveScroll: true })"
+                        v-on:click="markPostAsSolved"
                     >
                         {{ isSolution ? 'Unmark' : 'Mark' }} best solution
                     </button>
@@ -89,5 +89,13 @@ const deletePost = () => {
             preserveScroll: true
         })
     }
+}
+
+const markPostAsSolved = () => {
+    router.patch(route('discussions.solution.patch', props.post.discussion), {
+        post_id: props.isSolution ? null : props.post.id
+    }, {
+        preserveScroll: true
+    })
 }
 </script>
