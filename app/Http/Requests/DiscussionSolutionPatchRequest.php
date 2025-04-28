@@ -24,7 +24,7 @@ class DiscussionSolutionPatchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'post_id' => ['required', Rule::exists(Post::class, 'id')],
+            'post_id' => ['nullable', Rule::exists(Post::class, 'id')],
         ];
     }
 }
