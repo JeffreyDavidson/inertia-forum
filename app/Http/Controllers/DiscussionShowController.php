@@ -38,10 +38,10 @@ class DiscussionShowController extends Controller
         ]);
     }
 
-    public function getPageForPost(Discussion $discussion, $postId)
+    protected function getPageForPost(Discussion $discussion, $postId)
     {
         $index = $discussion->posts->search(fn ($post) => $post->id == $postId);
-        $page = (int) ceil($index + 1) / self::POSTS_PER_PAGE;
+        $page = (int) ceil(($index + 1) / self::POSTS_PER_PAGE);
 
         return $page;
     }
